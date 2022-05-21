@@ -11,7 +11,8 @@ import SwiftUI
 struct swiftMVVMApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(model: .init())
+            //ContentView(model: .init())
+            LoginView()
         }
     }
 }

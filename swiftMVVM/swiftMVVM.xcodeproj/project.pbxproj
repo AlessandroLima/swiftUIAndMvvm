@@ -14,6 +14,7 @@
 		B3553E8F2838412D00A00C0B /* swiftMVVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553E8E2838412D00A00C0B /* swiftMVVMTests.swift */; };
 		B3553E992838412D00A00C0B /* swiftMVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553E982838412D00A00C0B /* swiftMVVMUITests.swift */; };
 		B3553E9B2838412D00A00C0B /* swiftMVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553E9A2838412D00A00C0B /* swiftMVVMUITestsLaunchTests.swift */; };
+		B3553EAA2839144200A00C0B /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553EA92839144200A00C0B /* login.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		B3553E942838412D00A00C0B /* swiftMVVMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftMVVMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3553E982838412D00A00C0B /* swiftMVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftMVVMUITests.swift; sourceTree = "<group>"; };
 		B3553E9A2838412D00A00C0B /* swiftMVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftMVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B3553EA92839144200A00C0B /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +96,9 @@
 		B3553E7C2838412B00A00C0B /* swiftMVVM */ = {
 			isa = PBXGroup;
 			children = (
+				B3553EA82839142300A00C0B /* Binding */,
+				B3553EA7283913DD00A00C0B /* Minimal */,
 				B3553E7D2838412B00A00C0B /* swiftMVVMApp.swift */,
-				B3553E7F2838412B00A00C0B /* ContentView.swift */,
 				B3553E812838412D00A00C0B /* Assets.xcassets */,
 				B3553E832838412D00A00C0B /* Preview Content */,
 			);
@@ -125,6 +128,22 @@
 				B3553E9A2838412D00A00C0B /* swiftMVVMUITestsLaunchTests.swift */,
 			);
 			path = swiftMVVMUITests;
+			sourceTree = "<group>";
+		};
+		B3553EA7283913DD00A00C0B /* Minimal */ = {
+			isa = PBXGroup;
+			children = (
+				B3553E7F2838412B00A00C0B /* ContentView.swift */,
+			);
+			path = Minimal;
+			sourceTree = "<group>";
+		};
+		B3553EA82839142300A00C0B /* Binding */ = {
+			isa = PBXGroup;
+			children = (
+				B3553EA92839144200A00C0B /* login.swift */,
+			);
+			path = Binding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +278,7 @@
 			files = (
 				B3553E802838412B00A00C0B /* ContentView.swift in Sources */,
 				B3553E7E2838412B00A00C0B /* swiftMVVMApp.swift in Sources */,
+				B3553EAA2839144200A00C0B /* login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
