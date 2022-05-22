@@ -33,7 +33,7 @@ struct LoginView: View {
             .navigationBarItems(trailing: submitButton)
             .navigationBarTitle("Indentifique-se")
             .disabled(model.state.isLoginIn)
-            .alert(isPresented: model.bindings.isShowingError) {
+            .alert(isPresented: model.bindings.isShowingErrorAlert) {
                 showLoginErrorAlert()
                 
             }
@@ -85,23 +85,46 @@ extension LoginViewState {
 
 }
 
+extension Binding{
+    init<ObjectType: AnyObject>(
+        to path: ReferenceWritableKeyPath<ObjectType, Value> ,
+        on object: ObjectType){
+            self.init(get: { object[keyPath: path] },
+                      set: { object[keyPath: path] = $0 })
+        }
+}
+
 final class LoginViewModel: ObservableObject {
     
     @Published private(set) var state: LoginViewState
     
     // A criação de um Bind na mão garante que os states serão modificados pela model e só por ela.
     
+//    var bindings : (
+//        email: Binding<String>,
+//        password: Binding<String>,
+//        isShowingError: Binding<Bool>
+//    ){
+//        (
+//            email:  Binding(get: {self.state.email}, set: { email in
+//                self.state.email = email}),
+//            password:  Binding(get: {self.state.password}, set: { password in
+//                self.state.password = password}),
+//            isShowingError:  Binding(get: {self.state.isShowingErrorAlert}, set: {
+//                isShowingError in self.state.isShowingErrorAlert = isShowingError})
+//        )
+//
+//    }
+    
     var bindings : (
         email: Binding<String>,
         password: Binding<String>,
-        isShowingError: Binding<Bool>
+        isShowingErrorAlert: Binding<Bool>
     ){
         (
-            email:  Binding(get: {self.state.email}, set: { email in
-                self.state.email = email}),
-            password:  Binding(get: {self.state.password}, set: { password in
-                self.state.password = password}),
-            isShowingError:  Binding(get: {self.state.isShowingErrorAlert}, set: { isShowingError in self.state.isShowingErrorAlert = isShowingError})
+            email:  Binding(to: \.state.email, on: self),
+            password:  Binding(to: \.state.password, on: self),
+            isShowingErrorAlert:  Binding(to: \.state.isShowingErrorAlert, on: self)
         )
         
     }
