@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7174CDA3283A8356007F4571 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7174CDA1283A8007007F4571 /* LoginTests.swift */; };
 		B3553E7E2838412B00A00C0B /* swiftMVVMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553E7D2838412B00A00C0B /* swiftMVVMApp.swift */; };
 		B3553E802838412B00A00C0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553E7F2838412B00A00C0B /* ContentView.swift */; };
 		B3553E822838412D00A00C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3553E812838412D00A00C0B /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7174CDA1283A8007007F4571 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		B3553E7A2838412B00A00C0B /* swiftMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3553E7D2838412B00A00C0B /* swiftMVVMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftMVVMApp.swift; sourceTree = "<group>"; };
 		B3553E7F2838412B00A00C0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				B3553E8E2838412D00A00C0B /* swiftMVVMTests.swift */,
+				7174CDA1283A8007007F4571 /* LoginTests.swift */,
 			);
 			path = swiftMVVMTests;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3553E8F2838412D00A00C0B /* swiftMVVMTests.swift in Sources */,
+				7174CDA3283A8356007F4571 /* LoginTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

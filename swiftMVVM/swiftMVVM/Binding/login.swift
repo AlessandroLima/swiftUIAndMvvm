@@ -52,12 +52,15 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(loginViewModel: .init(initialState: .init()))
+        Group {
+            LoginView(loginViewModel: .init(initialState: .init()))
+            LoginView(loginViewModel: .init(initialState: .init()))
+        }
     }
 }
 
 
-struct LoginViewState {
+struct LoginViewState: Equatable {
     var email = "" {
         didSet {
             print("email: \(email)")
@@ -79,8 +82,12 @@ extension LoginViewState {
         email.isEmpty == false && password.isEmpty == false
     }
     
+    var footerMessage: String {
+        isLoginIn ? "Efetuando login..." : ""
+    }
+    
     var isLoginInMessage: some View {
-        Text(isLoginIn ? "Efetuando login..." : "")
+        Text(footerMessage)
     }
 
 }
@@ -129,7 +136,7 @@ final class LoginViewModel: ObservableObject {
         
     }
     
-    init(initialState: LoginViewState) {
+    init(initialState: LoginViewState = .init()) {
         state = initialState
     }
     
