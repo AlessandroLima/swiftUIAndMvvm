@@ -12,7 +12,10 @@ struct swiftMVVMApp: App {
     var body: some Scene {
         WindowGroup {
             //ContentView(model: .init())
-            LoginView(loginViewModel: .init(initialState: .init()))
+            LoginView(loginViewModel: .init(
+                service: EmptyLoginService(),
+                loginDidSuccessed: {})
+            )
         }
     }
 }
