@@ -16,6 +16,9 @@
 		B3553E992838412D00A00C0B /* swiftMVVMUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553E982838412D00A00C0B /* swiftMVVMUITests.swift */; };
 		B3553E9B2838412D00A00C0B /* swiftMVVMUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553E9A2838412D00A00C0B /* swiftMVVMUITestsLaunchTests.swift */; };
 		B3553EAA2839144200A00C0B /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3553EA92839144200A00C0B /* login.swift */; };
+		B37CA131283C0BEB00EC4B69 /* LoginServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37CA12F283C0BEB00EC4B69 /* LoginServiceProtocol.swift */; };
+		B37CA132283C0BEB00EC4B69 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37CA130283C0BEB00EC4B69 /* LoginViewModel.swift */; };
+		B37CA134283C0C2900EC4B69 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37CA133283C0C2900EC4B69 /* Binding+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		B3553E982838412D00A00C0B /* swiftMVVMUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftMVVMUITests.swift; sourceTree = "<group>"; };
 		B3553E9A2838412D00A00C0B /* swiftMVVMUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftMVVMUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B3553EA92839144200A00C0B /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
+		B37CA12F283C0BEB00EC4B69 /* LoginServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginServiceProtocol.swift; sourceTree = "<group>"; };
+		B37CA130283C0BEB00EC4B69 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B37CA133283C0C2900EC4B69 /* Binding+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Binding+Extension.swift"; path = "swiftMVVM/Extensions/Binding+Extension.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,9 @@
 		B3553EA82839142300A00C0B /* Binding */ = {
 			isa = PBXGroup;
 			children = (
+				B37CA133283C0C2900EC4B69 /* Binding+Extension.swift */,
+				B37CA12F283C0BEB00EC4B69 /* LoginServiceProtocol.swift */,
+				B37CA130283C0BEB00EC4B69 /* LoginViewModel.swift */,
 				B3553EA92839144200A00C0B /* login.swift */,
 			);
 			path = Binding;
@@ -280,7 +289,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3553E802838412B00A00C0B /* ContentView.swift in Sources */,
+				B37CA134283C0C2900EC4B69 /* Binding+Extension.swift in Sources */,
+				B37CA131283C0BEB00EC4B69 /* LoginServiceProtocol.swift in Sources */,
 				B3553E7E2838412B00A00C0B /* swiftMVVMApp.swift in Sources */,
+				B37CA132283C0BEB00EC4B69 /* LoginViewModel.swift in Sources */,
 				B3553EAA2839144200A00C0B /* login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

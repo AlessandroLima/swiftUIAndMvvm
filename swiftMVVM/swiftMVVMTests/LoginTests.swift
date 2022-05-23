@@ -99,7 +99,7 @@ class LoginTests: XCTestCase {
         XCTAssert(viewModel.state.canSubmit)
         XCTAssert(viewModel.state.footerMessage.isEmpty)
         
-        XCTAssert(didCallloginDidSuccessed)
+        XCTAssertFalse(didCallloginDidSuccessed)
     }
     
 }
