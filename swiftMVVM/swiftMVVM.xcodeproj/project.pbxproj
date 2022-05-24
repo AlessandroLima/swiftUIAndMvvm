@@ -19,6 +19,7 @@
 		B37CA131283C0BEB00EC4B69 /* LoginServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37CA12F283C0BEB00EC4B69 /* LoginServiceProtocol.swift */; };
 		B37CA132283C0BEB00EC4B69 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37CA130283C0BEB00EC4B69 /* LoginViewModel.swift */; };
 		B37CA134283C0C2900EC4B69 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37CA133283C0C2900EC4B69 /* Binding+Extension.swift */; };
+		B37CA136283D2CE000EC4B69 /* AppViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37CA135283D2CE000EC4B69 /* AppViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		B37CA12F283C0BEB00EC4B69 /* LoginServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginServiceProtocol.swift; sourceTree = "<group>"; };
 		B37CA130283C0BEB00EC4B69 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B37CA133283C0C2900EC4B69 /* Binding+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Binding+Extension.swift"; path = "swiftMVVM/Extensions/Binding+Extension.swift"; sourceTree = SOURCE_ROOT; };
+		B37CA135283D2CE000EC4B69 /* AppViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			children = (
 				B3553E8E2838412D00A00C0B /* swiftMVVMTests.swift */,
 				7174CDA1283A8007007F4571 /* LoginTests.swift */,
+				B37CA135283D2CE000EC4B69 /* AppViewModelTests.swift */,
 			);
 			path = swiftMVVMTests;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			files = (
 				B3553E8F2838412D00A00C0B /* swiftMVVMTests.swift in Sources */,
 				7174CDA3283A8356007F4571 /* LoginTests.swift in Sources */,
+				B37CA136283D2CE000EC4B69 /* AppViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,13 +57,10 @@ final class LoginViewModel: ObservableObject {
     
     
     func Login(){
+        
         state.isLoginIn = true
         
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)){
-        //            self.state.isLoginIn = false
-        //            self.state.isShowingErrorAlert = true
-        //        }
-        service.login(
+          service.login(
             email: state.email,
             password: state.password) { [weak self] erro in
                 
