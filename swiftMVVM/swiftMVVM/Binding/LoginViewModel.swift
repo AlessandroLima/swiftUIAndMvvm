@@ -49,7 +49,9 @@ final class LoginViewModel: ObservableObject {
     
     init(initialState: LoginViewState = .init(),
          service: LoginService,
-         loginDidSuccessed: @escaping ()->Void) {
+         loginDidSuccessed: @escaping ()->Void //TODO: Remove
+    )
+    {
         self.state = initialState
         self.service = service
         self.loginDidSuccessed = loginDidSuccessed
