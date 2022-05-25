@@ -1,6 +1,7 @@
 import XCTest
 @testable import swiftMVVM
 
+
 enum AppViewState {
     case login
     case loggedArea
@@ -10,16 +11,24 @@ struct User {
     
 }
 
-protocol SessionService {
+import Combine
+
+protocol SessionService: LoginService {
     var user: User? {get}
+    var userPublisher: AnyPublisher<User?, Never> { get }
+    func logout()
 }
 
 final class AppViewModel {
     
     @Published private(set) var state: AppViewState
+    private var userCancellable: AnyCancellable?
     
     init(sessionService: SessionService){
         self.state = sessionService.user == nil ? .login : .loggedArea
+        userCancellable = sessionService.userPublisher.sink { [weak self] user in
+            self?.state = user == nil ? .login : .loggedArea
+        }
     }
 }
 
@@ -34,7 +43,7 @@ final class AppViewModelTests: XCTestCase {
     
     func test_WhenUserIsLoggedIn_ShowsLogedArea(){
      
-        let sut = makeSUT(isLoggedIn: true)
+        let (sut, _) = makeSUT(isLoggedIn: true)
         
         XCTAssert(sut.state == .loggedArea)
     
@@ -43,7 +52,29 @@ final class AppViewModelTests: XCTestCase {
     func test_WhenUserIsNotLoggedIn_ShowsLogin(){
         
         //Chamo o makeSUT
-        let sut = makeSUT(isLoggedIn: false)
+        let (sut, _) = makeSUT(isLoggedIn: false)
+        
+        XCTAssert(sut.state == .login)
+    }
+    
+    func test_WhenUserLogsIn_ShowsLoggedArea(){
+        
+        //Chamo o makeSUT
+        let (sut, service) = makeSUT(isLoggedIn: false)
+        
+        service.login(email: "",
+                      password: "",
+                      completion: {_ in })
+        
+        XCTAssert(sut.state == .loggedArea)
+    }
+    
+    func test_WhenUserLogsOut_ShowsLoginArea(){
+        
+        //Chamo o makeSUT
+        let (sut, service) = makeSUT(isLoggedIn: true)
+        
+        service.logout()
         
         XCTAssert(sut.state == .login)
     }
@@ -52,25 +83,41 @@ final class AppViewModelTests: XCTestCase {
 
 private extension AppViewModelTests {
     
-    func makeSUT(isLoggedIn: Bool) -> AppViewModel {
+    func makeSUT(isLoggedIn: Bool) -> (AppViewModel, StubSessionService) {
         
         // Chama uma seessionService
-        let sessionService: SessionService = StubSessionService(user: isLoggedIn ? .init() : nil )
+        let sessionService: StubSessionService = StubSessionService(user: isLoggedIn ? .init() : nil )
         
         //retorna um AppViewModel que contêm ou não um User.
         // Se o estado for logado meu StubSessionService automaticamente passa um user.
         
         
-        return .init(sessionService: sessionService)
+        return (AppViewModel(sessionService: sessionService),sessionService)
     }
     
     final class StubSessionService: SessionService {
         
-        private(set) var user: User?
+        private let userSubject: CurrentValueSubject<User?, Never>
+        
+        private(set) lazy var userPublisher = userSubject.eraseToAnyPublisher()
+        
+        var user: User? { userSubject.value }
         
         init (user: User?) {
-            self.user = user
+            
+            self.userSubject = .init(user)
         }
+        
+        func login(email: String,
+                   password: String,
+                   completion: @escaping (Error?) -> Void) {
+            userSubject.send(.init())
+        }
+        
+        func logout() {
+            userSubject.send(nil)
+        }
+        
         
     }
     
