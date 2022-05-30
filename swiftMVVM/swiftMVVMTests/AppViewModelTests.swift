@@ -1,45 +1,6 @@
 import XCTest
-@testable import swiftMVVM
-
-
-enum AppViewState {
-    case login(LoginViewModel)
-    case loggedArea
-}
-
-struct User {
-    
-}
-
 import Combine
-
-protocol SessionService: LoginService {
-    var user: User? {get}
-    var userPublisher: AnyPublisher<User?, Never> { get }
-    func logout()
-}
-
-final class AppViewModel {
-    
-    @Published private(set) var state: AppViewState
-   
-    private var userCancellable: AnyCancellable?
-    
-    init(sessionService: SessionService){
-        
-        var viewModel = LoginViewModel(service: sessionService,
-                                       loginDidSuccessed: {})
-        
-        self.state = sessionService.user == nil ? .login(viewModel) : .loggedArea
-        
-        userCancellable = sessionService.userPublisher.sink { [weak self] user in
-        
-            self?.state = user == nil ? .login(viewModel) : .loggedArea
-        
-        }
-    }
-}
-
+@testable import swiftMVVM
 
 final class AppViewModelTests: XCTestCase {
     
@@ -49,11 +10,11 @@ final class AppViewModelTests: XCTestCase {
     }
     
     func test_WhenUserIsLoggedIn_ShowsLogedArea(){
-     
+        
         let (sut, _) = makeSUT(isLoggedIn: true)
         
-        XCTAssert(sut.state.isLogeedArea)
-    
+        XCTAssert(sut.state?.isLogeedArea == true)
+        
     }
     
     func test_WhenUserIsNotLoggedIn_ShowsLogin(){
@@ -61,7 +22,7 @@ final class AppViewModelTests: XCTestCase {
         //Chamo o makeSUT
         let (sut, _) = makeSUT(isLoggedIn: false)
         
-        XCTAssert(sut.state.isLogin)
+        XCTAssert(sut.state?.isLogin == true)
     }
     
     func test_WhenUserLogsIn_ShowsLoggedArea(){
@@ -73,7 +34,7 @@ final class AppViewModelTests: XCTestCase {
                       password: "",
                       completion: {_ in })
         
-        XCTAssert(sut.state.isLogeedArea)
+        XCTAssert(sut.state?.isLogeedArea == true)
     }
     
     func test_WhenUserLogsOut_ShowsLoginArea(){
@@ -83,7 +44,7 @@ final class AppViewModelTests: XCTestCase {
         
         service.logout()
         
-        XCTAssert(sut.state.isLogin)
+        XCTAssert(sut.state?.isLogin == true)
     }
     
 }
@@ -143,25 +104,3 @@ private extension AppViewState {
         return true
     }
 }
-
-Teste da view
-import SwiftUI
-
-struct AppView: View {
-
-    @ObservedObject var viewModel: AppViewModel
-
-    var body: some View {
-
-        switch viewModel.state {
-
-        case .login:
-            //return LoginView(loginViewModel: viewModel)
-            return EmptyView()
-        case .loggedArea:
-            return EmptyView()
-        }
-    }
-}
-
-
