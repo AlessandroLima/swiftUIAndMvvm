@@ -67,7 +67,7 @@ final class LoginViewModel: ObservableObject {
             password: state.password) { [weak self] erro in
                 
                 if erro == nil {
-                    self?.loginDidSuccessed()
+                    //self?.loginDidSuccessed()
                 } else {
                     self?.state.isLoginIn = false
                     self?.state.isShowingErrorAlert = true

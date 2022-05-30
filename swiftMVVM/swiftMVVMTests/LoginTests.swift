@@ -11,7 +11,7 @@ import XCTest
 
 class LoginTests: XCTestCase {
     
-    private var viewModel: LoginViewModel!
+    private var loginViewModel: LoginViewModel!
     private var service: LoginServiceMock!
     private var didCallloginDidSuccessed: Bool!
     
@@ -19,7 +19,7 @@ class LoginTests: XCTestCase {
         super.setUp()
         service = .init()
         didCallloginDidSuccessed = false
-        viewModel = .init(service: service,
+        loginViewModel = .init(service: service,
                           loginDidSuccessed:{ [weak self] in
             self?.didCallloginDidSuccessed = true
             
@@ -28,29 +28,29 @@ class LoginTests: XCTestCase {
     }
     
     func testDefultInitialState (){
-        XCTAssertEqual(viewModel.state,
+        XCTAssertEqual(loginViewModel.state,
                        LoginViewState(email: "",
                                       password: "",
                                       isLoginIn: false,
                                       isShowingErrorAlert: false))
-        XCTAssertFalse(viewModel.state.canSubmit)
-        XCTAssert(viewModel.state.footerMessage.isEmpty)
+        XCTAssertFalse(loginViewModel.state.canSubmit)
+        XCTAssert(loginViewModel.state.footerMessage.isEmpty)
         
     }
     
     func testSuccessFullLoginFlow () {
         
         //usamos wrappedValue para poder escrever no binding
-        viewModel.bindings.email.wrappedValue = "aletlima@gmail.com"
-        viewModel.bindings.password.wrappedValue = "123456"
-        XCTAssertTrue(viewModel.state.canSubmit)
-        XCTAssert(viewModel.state.footerMessage.isEmpty)
+        loginViewModel.bindings.email.wrappedValue = "aletlima@gmail.com"
+        loginViewModel.bindings.password.wrappedValue = "123456"
+        XCTAssertTrue(loginViewModel.state.canSubmit)
+        XCTAssert(loginViewModel.state.footerMessage.isEmpty)
         
-        viewModel.Login()
-        XCTAssertFalse(viewModel.state.canSubmit)
-        XCTAssert(!viewModel.state.footerMessage.isEmpty)
+        loginViewModel.Login()
+        XCTAssertFalse(loginViewModel.state.canSubmit)
+        XCTAssert(!loginViewModel.state.footerMessage.isEmpty)
         
-        XCTAssertEqual(viewModel.state,
+        XCTAssertEqual(loginViewModel.state,
                        LoginViewState(email: "aletlima@gmail.com",
                                       password: "123456",
                                       isLoginIn: true,
@@ -69,16 +69,16 @@ class LoginTests: XCTestCase {
     func testFailableLoginFlow () {
         
         //usamos wrappedValue para poder escrever no binding
-        viewModel.bindings.email.wrappedValue = "aletlima@gmail.com"
-        viewModel.bindings.password.wrappedValue = "123456"
-        XCTAssertTrue(viewModel.state.canSubmit)
-        XCTAssert(viewModel.state.footerMessage.isEmpty)
+        loginViewModel.bindings.email.wrappedValue = "aletlima@gmail.com"
+        loginViewModel.bindings.password.wrappedValue = "123456"
+        XCTAssertTrue(loginViewModel.state.canSubmit)
+        XCTAssert(loginViewModel.state.footerMessage.isEmpty)
         
-        viewModel.Login()
-        XCTAssertFalse(viewModel.state.canSubmit)
-        XCTAssert(!viewModel.state.footerMessage.isEmpty)
+        loginViewModel.Login()
+        XCTAssertFalse(loginViewModel.state.canSubmit)
+        XCTAssert(!loginViewModel.state.footerMessage.isEmpty)
         
-        XCTAssertEqual(viewModel.state,
+        XCTAssertEqual(loginViewModel.state,
                        LoginViewState(email: "aletlima@gmail.com",
                                       password: "123456",
                                       isLoginIn: true,
@@ -90,14 +90,14 @@ class LoginTests: XCTestCase {
         struct FakeError: Error {}
         service.completion?(FakeError())
         
-        XCTAssertEqual(viewModel.state,
+        XCTAssertEqual(loginViewModel.state,
                        LoginViewState(email: "aletlima@gmail.com",
                                       password: "123456",
                                       isLoginIn: false,
                                       isShowingErrorAlert: true))
         
-        XCTAssert(viewModel.state.canSubmit)
-        XCTAssert(viewModel.state.footerMessage.isEmpty)
+        XCTAssert(loginViewModel.state.canSubmit)
+        XCTAssert(loginViewModel.state.footerMessage.isEmpty)
         
         XCTAssertFalse(didCallloginDidSuccessed)
     }

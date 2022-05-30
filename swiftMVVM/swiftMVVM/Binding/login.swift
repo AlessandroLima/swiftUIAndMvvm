@@ -65,7 +65,7 @@ struct LoginView_Previews: PreviewProvider {
 struct LoginViewState: Equatable {
     var email = "" {
         didSet {
-            print("email: \(email)")
+            //print("email: \(email)")
         }
     }
    var password = ""

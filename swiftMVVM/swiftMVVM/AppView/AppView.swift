@@ -14,13 +14,24 @@ struct AppView: View {
         
         switch viewModel.state {
             
-        case .login:
-            //return LoginView(loginViewModel: viewModel)
-            return EmptyView()
-        case .loggedArea:
-            return EmptyView()
+        case let .login(viewModel):
+            return AnyView (
+                LoginView(loginViewModel: viewModel)
+            )
+            
+        case let .loggedArea(sessionService):
+            return AnyView(
+                VStack{
+                    Text("Bem vindo!")
+                    Button(action: sessionService.logout,
+                           label: {
+                        Text("log out")
+                    })
+                }
+            )
+        
         case .none:
-            return EmptyView()
+            return AnyView(EmptyView())
         }
     }
 }
@@ -31,5 +42,6 @@ struct AppView_Previews: PreviewProvider {
     
     static var previews: some View {
         AppView(viewModel: .init(sessionService: FakeSessionService(user: nil)))
+            .preferredColorScheme(.dark)
     }
 }
