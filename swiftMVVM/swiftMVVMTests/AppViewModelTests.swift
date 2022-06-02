@@ -47,6 +47,22 @@ final class AppViewModelTests: XCTestCase {
         XCTAssert(sut.state?.isLogin == true)
     }
     
+    func test_whenUserIsLoggedInAndUserInfoChanged_andStateIsNotUpdated() {
+        let (sut, service) = makeSUT(isLoggedIn: true)
+        
+        var sinkCount = 0
+        
+        var cancellabe: AnyCancellable? = sut.$state.sink{ _ in
+            sinkCount +=  1
+        }
+        
+        service.user?.nome = "Alexandre"
+        
+        XCTAssertEqual(sinkCount, 1)
+        
+        cancellabe = nil
+    }
+    
 }
 
 private extension AppViewModelTests {
@@ -54,7 +70,7 @@ private extension AppViewModelTests {
     func makeSUT(isLoggedIn: Bool) -> (AppViewModel, StubSessionService) {
         
         // Chama uma seessionService
-        let sessionService: StubSessionService = StubSessionService(user: isLoggedIn ? .init() : nil )
+        let sessionService: StubSessionService = StubSessionService(user: isLoggedIn ? .init(User(email: "", nome: "" )) : nil )
         
         //retorna um AppViewModel que contêm ou não um User.
         // Se o estado for logado meu StubSessionService automaticamente passa um user.
@@ -69,17 +85,20 @@ private extension AppViewModelTests {
         
         private(set) lazy var userPublisher = userSubject.eraseToAnyPublisher()
         
-        var user: User? { userSubject.value }
+        var user: User? {
+    
+            get { self.userSubject.value }
+            set { userSubject.send(newValue)}
+        }
         
         init (user: User?) {
-            
             self.userSubject = .init(user)
         }
         
         func login(email: String,
                    password: String,
                    completion: @escaping (Error?) -> Void) {
-            userSubject.send(.init())
+            userSubject.send(.init(User(email: "", nome:"")))
         }
         
         func logout() {

@@ -22,7 +22,7 @@ final class FakeSessionService: SessionService {
     func login(email: String,
                password: String,
                completion: @escaping (Error?) -> Void) {
-        userSubject.send(.init())
+        userSubject.send(.init(User(email:email , nome: "Alessandro")))
     }
     
     func logout() {

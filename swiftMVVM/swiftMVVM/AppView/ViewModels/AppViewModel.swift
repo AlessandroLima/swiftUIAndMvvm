@@ -12,11 +12,14 @@ final class AppViewModel: ObservableObject {
         let  viewModel = LoginViewModel(service: sessionService,
                                        loginDidSuccessed: {})
      
-        userCancellable = sessionService.userPublisher.sink { [weak self] user in
+        userCancellable = sessionService.userPublisher
+            .map { $0 != nil }
+            .removeDuplicates()
+            .sink{ [weak self] isLoggedIn in
             
-            self?.state = user == nil
-            ? .login(viewModel)
-            : .loggedArea(sessionService    )
+            self?.state = isLoggedIn
+            ? .loggedArea(sessionService)
+            : .login(viewModel)
             
         }
     }
