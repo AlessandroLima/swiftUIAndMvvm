@@ -58,10 +58,12 @@ final class AppViewModelTests: XCTestCase {
         
         service.user?.nome = "Alexandre"
         
-        XCTAssertEqual(sinkCount, 1)
+        XCTAssertEqual(sinkCount    , 1)
         
         cancellabe = nil
     }
+    
+    
     
 }
 

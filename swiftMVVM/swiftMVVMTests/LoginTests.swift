@@ -102,6 +102,24 @@ class LoginTests: XCTestCase {
         XCTAssertFalse(didCallloginDidSuccessed)
     }
     
+    func test_showSignupflow_createsSignupViewModel() {
+        loginViewModel.showSignupFlow()
+        XCTAssertNotNil(loginViewModel.state.signupViewModel)
+        
+    }
+    
+    func test_signupBinding_readsValueFromState() {
+        loginViewModel.showSignupFlow()
+        XCTAssertNotNil(loginViewModel.bindings.signupViewModel.wrappedValue)
+    
+    }
+    
+    func test_signupBinding_writesValueToState() {
+        loginViewModel.showSignupFlow()
+        loginViewModel.bindings.signupViewModel.wrappedValue = nil
+        XCTAssertNil(loginViewModel.bindings.signupViewModel.wrappedValue)
+    
+    }
 }
 
 private final class LoginServiceMock: LoginService {

@@ -7,6 +7,41 @@
 
 import SwiftUI
 
+struct LoginViewState: Equatable {
+    var email = "" {
+        didSet {
+            //print("email: \(email)")
+        }
+    }
+   var password = ""
+   var isLoginIn = false
+   var isShowingErrorAlert = false {
+        didSet {
+            print("isShowingError: \(isShowingErrorAlert)")
+        }
+    }
+    
+    var signupViewModel: SignupViewModel?
+    
+}
+
+extension LoginViewState {
+    
+    var canSubmit: Bool {
+        email.isEmpty == false && password.isEmpty == false && isLoginIn == false
+    }
+    
+    var footerMessage: String {
+        isLoginIn ? "Efetuando login..." : ""
+    }
+    
+    var isLoginInMessage: some View {
+        Text(footerMessage)
+    }
+
+}
+
+
 struct LoginView: View {
     
     @ObservedObject private var model: LoginViewModel
@@ -29,17 +64,24 @@ struct LoginView: View {
                     SecureField("senha", text: model.bindings.password)
                         .autocapitalization(.none)
                 }
+                Section(header: Text("Não possui uma conta?")) {
+                    Button(action: model.showSignupFlow){
+                        Text("criar conta")
+                    }
+                }
             }
             .navigationBarItems(trailing: submitButton)
             .navigationBarTitle("Indentifique-se")
             .disabled(model.state.isLoginIn)
             .alert(isPresented: model.bindings.isShowingErrorAlert) {
                 showLoginErrorAlert()
-                
             }
-            
+            .sheet(item: model.bindings.signupViewModel) { signupViewModel in
+                NavigationView {
+                    SignupView(signupViewModel: signupViewModel)
+                }
+            }
         }
-        
     }
     
     private var submitButton: some View {
@@ -59,39 +101,6 @@ struct LoginView_Previews: PreviewProvider {
             )
         }
     }
-}
-
-
-struct LoginViewState: Equatable {
-    var email = "" {
-        didSet {
-            //print("email: \(email)")
-        }
-    }
-   var password = ""
-   var isLoginIn = false
-   var isShowingErrorAlert = false {
-        didSet {
-            print("isShowingError: \(isShowingErrorAlert)")
-        }
-    }
-    
-}
-
-extension LoginViewState {
-    
-    var canSubmit: Bool {
-        email.isEmpty == false && password.isEmpty == false && isLoginIn == false
-    }
-    
-    var footerMessage: String {
-        isLoginIn ? "Efetuando login..." : ""
-    }
-    
-    var isLoginInMessage: some View {
-        Text(footerMessage)
-    }
-
 }
 
 

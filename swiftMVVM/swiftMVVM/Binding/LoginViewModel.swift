@@ -37,12 +37,14 @@ final class LoginViewModel: ObservableObject {
     var bindings : (
         email: Binding<String>,
         password: Binding<String>,
-        isShowingErrorAlert: Binding<Bool>
+        isShowingErrorAlert: Binding<Bool>,
+        signupViewModel: Binding<SignupViewModel?>
     ){
         (
             email:  Binding(to: \.state.email, on: self),
             password:  Binding(to: \.state.password, on: self),
-            isShowingErrorAlert:  Binding(to: \.state.isShowingErrorAlert, on: self)
+            isShowingErrorAlert:  Binding(to: \.state.isShowingErrorAlert, on: self),
+            signupViewModel:  Binding(to: \.state.signupViewModel, on: self)
         )
         
     }
@@ -77,6 +79,12 @@ final class LoginViewModel: ObservableObject {
     
     func RestartLoginErrorState() {
         state.isShowingErrorAlert = false
+    }
+    
+    func showSignupFlow(){
+        state.signupViewModel = SignupViewModel(flowCompleted: { [weak self] in
+            self?.state.signupViewModel = nil
+        })
     }
    
     
